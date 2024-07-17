@@ -1,7 +1,16 @@
+import { useContext } from "react";
 import { FaReddit, FaSearch } from "react-icons/fa";
 import { Link } from "react-router-dom";
+import { GlobalContext } from "../../context/index";
 
 export default function Header() {
+  const { search, setSearch } = useContext(GlobalContext);
+
+  function handleSubmit() {
+    console.log(search);
+    setSearch('');
+  }
+
   return (
     <nav className="flex justify-between items-center py-5 w-[95vw] mx-auto flex-row lg:flex-row gap-5 lg:gap-0 border-b border-black-4 ">
       <Link to={"/"}>
@@ -15,12 +24,16 @@ export default function Header() {
           <input
             placeholder="Search Reddit"
             name="search-reddit"
-            value={""}
+            value={search}
+            onChange={(event) => setSearch(event.target.value)}
             className="mr-3 w-[400px] h-[40px] rounded-lg border-solid border-2 border-black-700 outline-offset-2 shadow-xl"
           />
-          <FaSearch className="w-[35px] h-[35px] hover:text-red-500" />
+          <FaSearch
+            onClick={handleSubmit}
+            className="w-[35px] h-[35px] hover:text-red-500"
+          />
         </div>
       </form>
     </nav>
   );
-} 
+}
