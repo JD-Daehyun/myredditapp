@@ -9,7 +9,7 @@ function App() {
   return (
     <div>
       <Header />
-      <div className="flex flex-col md:flex-row">
+      <div className="flex flex-col md:flex-row py-5 w-[95vw] mx-auto">
       <SubReddits />
       <Routes>
         <Route path="/" element={<HomePage />} />
