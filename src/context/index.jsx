@@ -34,7 +34,7 @@ export default function GlobalState({ children }) {
   }
 
   return (
-    <GlobalContext.Provider value={{ search, setSearch, handleSubmit }}>
+    <GlobalContext.Provider value={{ reddits, search, setReddits, setSearch, handleSubmit }}>
       {children}
     </GlobalContext.Provider>
   );
