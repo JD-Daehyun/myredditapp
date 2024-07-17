@@ -10,7 +10,7 @@ export default function SubReddits() {
     fetchSubReddits();
   }, []);
   return (
-    <div className="flex flex-row bg-gray-100  mb-5 rounded overflow-x-scroll items-center md:flex-col md:mr-5 md:overflow-hidden" >
+    <div className="flex flex-row bg-gray-100  mb-5 rounded overflow-x-scroll items-center md:flex-col md:mr-5 md:overflow-hidden md:h-fit" >
         <h1 className="font-semibold text-3xl p-3">SubReddits</h1>
       {loading ? (
         <h1>Loading...Please Wait!</h1>
