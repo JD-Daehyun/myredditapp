@@ -7,6 +7,7 @@ export default function GlobalState({ children }) {
   const [search, setSearch] = useState("");
   const [loading, setLoading] = useState(false);
   const [reddits, setReddits] = useState([]);
+  const [subReddits, setSubReddits] = useState([]);
 
   async function handleSubmit(event) {
     event.preventDefault();
@@ -32,9 +33,25 @@ export default function GlobalState({ children }) {
       setLoading(false);
     }
   }
+  async function fetchSubReddits(){
+    setLoading(true);
+
+    try{
+      const response = await fetch( `https://www.reddit.com/subreddits.json`);
+      const result = await response.json();
+      // console.log("SubReddit", result);
+      const subRedditData = result?.data?.children;
+      console.log(subRedditData);
+      setSubReddits(subRedditData);
+
+    }catch(e){
+      console.log(e);
+      setLoading(false);
+    }
+    }
 
   return (
-    <GlobalContext.Provider value={{ reddits, search, setReddits, setSearch, handleSubmit }}>
+    <GlobalContext.Provider value={{ subReddits, reddits, search, setSubReddits, setReddits, setSearch, handleSubmit, fetchSubReddits }}>
       {children}
     </GlobalContext.Provider>
   );

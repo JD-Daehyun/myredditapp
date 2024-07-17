@@ -6,7 +6,7 @@ export default function HomePage() {
   const { reddits, setReddits, loading, setLoading } =
     useContext(GlobalContext);
   return (
-    <div>
+    <div className="flex flex-col bg-red-800">
       {
       loading ? (
         <h1>Loading...Please Wait</h1>
