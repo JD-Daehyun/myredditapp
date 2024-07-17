@@ -8,11 +8,15 @@ export default function GlobalState({ children }) {
   const [loading, setLoading] = useState(false);
 
 
-  function handleSubmit(event) {
+  async function handleSubmit(event) {
     event.preventDefault();
     setLoading(true);
     console.log(search);
+    const response = await fetch(`https://www.reddit.com/search.json?q=${search}`);
+    const data = await response.json();
+    console.log(data);
     setSearch('');
+
   }
 
 
