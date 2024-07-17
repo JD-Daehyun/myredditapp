@@ -3,7 +3,7 @@ import { FaComment } from "react-icons/fa";
 
 export default function RedditItem({ reddit }) {
   return (
-    <div className="p-5 flex justify-between flex-col gap-2 border-b border-black-4 hover:bg-gray-100  rounded-2xl">
+    <div className="p-5 flex justify-between flex-col gap-2 border-b-4  border-r-4 border-black-500 hover:bg-gray-100 rounded-2xl max-w-[60%]">
       
       <div className="flex flex-row items-center">
         <img

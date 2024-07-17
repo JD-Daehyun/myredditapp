@@ -14,7 +14,7 @@ export default function Header() {
           <h1 className="font-semibold text-3xl text-red-bold">Reddit</h1>
         </div>
       </Link>
-      <form>
+      <form onSubmit={handleSubmit}>
         <div className="mr-5 flex justify-between items-center flex-row gap-3">
           <input
             placeholder="Search Reddit"
