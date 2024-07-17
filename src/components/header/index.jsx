@@ -4,12 +4,7 @@ import { Link } from "react-router-dom";
 import { GlobalContext } from "../../context/index";
 
 export default function Header() {
-  const { search, setSearch } = useContext(GlobalContext);
-
-  function handleSubmit() {
-    console.log(search);
-    setSearch('');
-  }
+  const { search, setSearch, handleSubmit } = useContext(GlobalContext);
 
   return (
     <nav className="flex justify-between items-center py-5 w-[95vw] mx-auto flex-row lg:flex-row gap-5 lg:gap-0 border-b border-black-4 ">
