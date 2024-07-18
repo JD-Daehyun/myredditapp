@@ -17,7 +17,7 @@ export default function Header() {
       <form onSubmit={handleSubmit}>
         <div className="mr-5 flex justify-between items-center flex-row gap-3">
           <input
-            placeholder="Search Reddit"
+            placeholder=" Search Reddit"
             name="search-reddit"
             value={search}
             onChange={(event) => setSearch(event.target.value)}
