@@ -1,4 +1,4 @@
-import { createContext, useState } from "react";
+import { createContext, useState, useEffect} from "react";
 
 export const GlobalContext = createContext(null);
 
@@ -11,11 +11,14 @@ export default function GlobalState({ children }) {
   const [subRedditUrl, setSubRedditUrl] = useState("/r/funny/");
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
 
+  useEffect(()=>{
+    fetchHomePageData();
+  },[])
 
   async function handleSubmit(event) {
     event.preventDefault();
     setLoading(true);
-    // console.log(search);
+    console.log(search);
     try {
       const response = await fetch(
         `https://www.reddit.com/search.json?q=${search}`
@@ -51,7 +54,7 @@ export default function GlobalState({ children }) {
 
   async function fetchHomePageData(url='/') {
     setLoading(true);
-    setSubRedditUrl(url)
+    setSubRedditUrl(url);
     if( url && url.length >1){
       url = url.slice(0,-1);
     }
@@ -61,7 +64,7 @@ export default function GlobalState({ children }) {
       );
       const data = await response.json();
       const initialData = data?.data?.children || [];
-      console.log(initialData);
+      // console.log(initialData);
       setReddits(initialData);
       setLoading(false);
     } catch (e) {

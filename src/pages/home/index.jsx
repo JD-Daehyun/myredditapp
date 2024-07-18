@@ -3,13 +3,8 @@ import { GlobalContext } from "../../context";
 import RedditItem from "../../components/reddit-item";
 
 export default function HomePage() {
-  const { reddits, loading, fetchHomePageData } =
+  const { reddits, loading } =
     useContext(GlobalContext);
-
-
-    useEffect(()=>{
-      fetchHomePageData();
-    },[])
 
   return (
     <div className="flex flex-col w-full  gap-3 border-l-2">
