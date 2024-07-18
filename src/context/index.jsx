@@ -41,7 +41,7 @@ export default function GlobalState({ children }) {
       const result = await response.json();
       // console.log("SubReddit", result);
       const subRedditData = result?.data?.children;
-      // console.log(subRedditData);
+      console.log(subRedditData);
       setSubReddits(subRedditData);
 
     }catch(e){
@@ -56,7 +56,7 @@ export default function GlobalState({ children }) {
         const response = await fetch("https://www.reddit.com/r/home.json");
         const data = await response.json();
         const initialData = data?.data?.children;
-        // console.log(initialData)
+        console.log(initialData)
         setReddits(initialData);
         setLoading(false);
 
