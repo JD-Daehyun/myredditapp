@@ -8,7 +8,7 @@ export default function GlobalState({ children }) {
   const [loading, setLoading] = useState(false);
   const [reddits, setReddits] = useState([]);
   const [subReddits, setSubReddits] = useState([]);
-  const [subredditName, setSubRedditName] = useState("home");
+  const [subredditName, setSubRedditName] = useState("");
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
   async function handleSubmit(event) {
     event.preventDefault();
@@ -51,7 +51,7 @@ export default function GlobalState({ children }) {
     setLoading(true);
     try {
       const response = await fetch(
-        `https://www.reddit.com/r/${subredditName.toLowerCase()}/.json`
+        `https://www.reddit.com${subredditName.toLowerCase()}/.json`
       );
       const data = await response.json();
       const initialData = data?.data?.children;

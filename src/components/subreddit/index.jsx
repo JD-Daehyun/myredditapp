@@ -35,7 +35,7 @@ export default function SubReddits() {
         <h1>Loading...Please Wait!</h1>
       ) : (
         subReddits.map((subReddit) => (
-          <SubRedditItem subReddit={subReddit?.data} />
+          <SubRedditItem key ={subReddit.id} subReddit={subReddit?.data} />
         ))
       )}
     </div>
