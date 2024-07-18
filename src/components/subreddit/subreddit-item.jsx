@@ -2,13 +2,13 @@ import { useContext } from "react";
 import { GlobalContext } from "../../context";
 
 export default function SubRedditItem({ subReddit }) {
-  const { subredditName, setSubRedditName } = useContext(GlobalContext);
+  const { subRedditUrl, fetchHomePageData } = useContext(GlobalContext);
 
-//   console.log(subredditName, subReddit.url);
+    console.log(subRedditUrl, subReddit.url);
   return (
-    <div onClick={() => setSubRedditName(subReddit.url)}>
-      {subredditName === subReddit.url ? (
-        <div className="flex flex-col items-center m-2 p-4 md:flex-row bg-red-900">
+    <div onClick={() => fetchHomePageData(subReddit.url)}>
+      {subRedditUrl === subReddit.url ? (
+        <div className="flex flex-col items-center m-2 p-4 md:flex-row bg-red-900 text-white">
           <img
             src={subReddit.icon_img}
             className="w-[40px] h-[40px] rounded-full border-red-500 border-solid border-4 "

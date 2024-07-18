@@ -3,12 +3,12 @@ import { GlobalContext } from "../../context";
 import RedditItem from "../../components/reddit-item";
 
 export default function HomePage() {
-  const { reddits, setReddits, loading, setLoading, fetchInitialData } =
+  const { reddits, loading, fetchHomePageData } =
     useContext(GlobalContext);
 
 
     useEffect(()=>{
-      fetchInitialData();
+      fetchHomePageData();
     },[])
 
   return (

@@ -8,9 +8,10 @@ export default function GlobalState({ children }) {
   const [loading, setLoading] = useState(false);
   const [reddits, setReddits] = useState([]);
   const [subReddits, setSubReddits] = useState([]);
-  const [subredditName, setSubRedditName] = useState("/r/Home/");
+  const [subRedditUrl, setSubRedditUrl] = useState("/r/funny/");
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
-  console.log(subredditName);
+
+
   async function handleSubmit(event) {
     event.preventDefault();
     setLoading(true);
@@ -48,14 +49,18 @@ export default function GlobalState({ children }) {
     }
   }
 
-  async function fetchInitialData() {
+  async function fetchHomePageData(url='/') {
     setLoading(true);
+    setSubRedditUrl(url)
+    if( url && url.length >1){
+      url = url.slice(0,-1);
+    }
     try {
       const response = await fetch(
-        `https://www.reddit.com${subredditName.toLowerCase()}/.json`
+        `https://www.reddit.com${url}.json`
       );
       const data = await response.json();
-      const initialData = data?.data?.children;
+      const initialData = data?.data?.children || [];
       console.log(initialData);
       setReddits(initialData);
       setLoading(false);
@@ -71,14 +76,14 @@ export default function GlobalState({ children }) {
         subReddits,
         reddits,
         search,
-        subredditName,
-        setSubRedditName,
+        subRedditUrl,
+        setSubRedditUrl,
         setSubReddits,
         setReddits,
         setSearch,
         handleSubmit,
         fetchSubReddits,
-        fetchInitialData,
+        fetchHomePageData,
         windowWidth,
         setWindowWidth,
       }}
