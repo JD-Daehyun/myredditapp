@@ -4,9 +4,9 @@ import { GlobalContext } from "../../context";
 export default function SubRedditItem({ subReddit }) {
   const { subredditName, setSubRedditName } = useContext(GlobalContext);
 
-  console.log(subredditName, subReddit.url);
+//   console.log(subredditName, subReddit.url);
   return (
-    <div>
+    <div onClick={() => setSubRedditName(subReddit.url)}>
       {subredditName === subReddit.url ? (
         <div className="flex flex-col items-center m-2 p-4 md:flex-row bg-red-900">
           <img

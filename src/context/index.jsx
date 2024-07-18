@@ -8,8 +8,9 @@ export default function GlobalState({ children }) {
   const [loading, setLoading] = useState(false);
   const [reddits, setReddits] = useState([]);
   const [subReddits, setSubReddits] = useState([]);
-  const [subredditName, setSubRedditName] = useState("");
+  const [subredditName, setSubRedditName] = useState("/r/Home/");
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+  console.log(subredditName);
   async function handleSubmit(event) {
     event.preventDefault();
     setLoading(true);
@@ -37,9 +38,9 @@ export default function GlobalState({ children }) {
     try {
       const response = await fetch(`https://www.reddit.com/subreddits.json`);
       const result = await response.json();
-      console.log("SubReddit", result);
+      // console.log("SubReddit", result);
       const subRedditData = result?.data?.children;
-      console.log(subRedditData);
+      // console.log(subRedditData);
       setSubReddits(subRedditData);
     } catch (e) {
       console.log(e);
@@ -70,6 +71,8 @@ export default function GlobalState({ children }) {
         subReddits,
         reddits,
         search,
+        subredditName,
+        setSubRedditName,
         setSubReddits,
         setReddits,
         setSearch,
