@@ -19,12 +19,12 @@ export default function GlobalState({ children }) {
         `https://www.reddit.com/search.json?q=${search}`
       );
       const result = await response.json();
-      console.log(result);
+      // console.log(result);
       setSearch("");
       setLoading(false);
 
       const redditData = result?.data?.children;
-      console.log(redditData);
+      // console.log(redditData);
       setReddits(redditData);
     
 
@@ -41,7 +41,7 @@ export default function GlobalState({ children }) {
       const result = await response.json();
       // console.log("SubReddit", result);
       const subRedditData = result?.data?.children;
-      console.log(subRedditData);
+      // console.log(subRedditData);
       setSubReddits(subRedditData);
 
     }catch(e){
@@ -50,8 +50,24 @@ export default function GlobalState({ children }) {
     }
     }
 
+    async function fetchInitialData(){
+      setLoading(true);
+      try{
+        const response = await fetch("https://www.reddit.com/r/home.json");
+        const data = await response.json();
+        const initialData = data?.data?.children;
+        // console.log(initialData)
+        setReddits(initialData);
+        setLoading(false);
+
+      }catch(e){
+        console.log(e)
+        setLoading(false);
+      }
+    }
+
   return (
-    <GlobalContext.Provider value={{ subReddits, reddits, search, setSubReddits, setReddits, setSearch, handleSubmit, fetchSubReddits }}>
+    <GlobalContext.Provider value={{ subReddits, reddits, search, setSubReddits, setReddits, setSearch, handleSubmit, fetchSubReddits, fetchInitialData}}>
       {children}
     </GlobalContext.Provider>
   );

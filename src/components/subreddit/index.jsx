@@ -10,12 +10,14 @@ export default function SubReddits() {
     fetchSubReddits();
   }, []);
   return (
-    <div className="flex flex-row bg-gray-100  m-5 rounded overflow-x-scroll items-center md:flex-col md:mr-5 md:overflow-hidden md:h-fit md:w-4/12" >
-        <h1 className="font-semibold text-3xl p-3">SubReddits</h1>
+    <div className="flex flex-row bg-gray-100  m-5 rounded overflow-x-scroll items-center md:flex-col md:mr-5 md:overflow-hidden md:h-fit md:w-4/12">
+      <h1 className="font-semibold text-3xl p-3">SubReddits</h1>
       {loading ? (
         <h1>Loading...Please Wait!</h1>
       ) : (
-        subReddits.map((subReddit) => <SubRedditItem subReddit={subReddit?.data} />)
+        subReddits.map((subReddit) => (
+          <SubRedditItem subReddit={subReddit?.data} />
+        ))
       )}
     </div>
   );

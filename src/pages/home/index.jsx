@@ -1,10 +1,16 @@
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import { GlobalContext } from "../../context";
 import RedditItem from "../../components/reddit-item";
 
 export default function HomePage() {
-  const { reddits, setReddits, loading, setLoading } =
+  const { reddits, setReddits, loading, setLoading, fetchInitialData } =
     useContext(GlobalContext);
+
+
+    useEffect(()=>{
+      fetchInitialData();
+    },[])
+
   return (
     <div className="flex flex-col w-full  gap-3 border-l-2">
       {loading ? (
