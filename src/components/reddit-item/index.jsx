@@ -1,10 +1,18 @@
+import { useContext } from "react";
 import { AiOutlineArrowUp, AiOutlineArrowDown } from "react-icons/ai";
 import { FaComment } from "react-icons/fa";
+import { Link } from "react-router-dom";
+import { GlobalContext } from "../../context";
 
 export default function RedditItem({ reddit }) {
+
+  const { selectedReddit, setSelectedReddit } = useContext(GlobalContext);
   return (
-    <div className="p-5 flex justify-between flex-col gap-2 border-b-4  border-r-4 border-black-500 hover:bg-gray-100 rounded-2xl">
-      
+    <Link
+      to={`${reddit.id}`}
+      onClick={()=> setSelectedReddit(reddit)}
+      className="p-5 flex justify-between flex-col gap-2 border-b-4  border-r-4 border-black-500 hover:bg-gray-100 rounded-2xl"
+    >
       <div className="flex flex-row items-center">
         <img
           src="https://www.redditstatic.com/avatars/defaults/v2/avatar_default_1.png"
@@ -35,6 +43,6 @@ export default function RedditItem({ reddit }) {
           <p>{reddit.num_comments} Comments</p>
         </div>
       </div>
-    </div>
+    </Link>
   );
 }

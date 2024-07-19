@@ -1,14 +1,15 @@
 import { useContext } from "react";
 import { GlobalContext } from "../../context";
+import { Link } from "react-router-dom";
 
 export default function SubRedditItem({ subReddit }) {
   const { subRedditUrl, fetchHomePageData } = useContext(GlobalContext);
 
   // console.log(subRedditUrl, subReddit.url);
   return (
-    <div onClick={() => fetchHomePageData(subReddit.url)} className="hover:bg-red-500">
+    <Link to={'/'} onClick={() => fetchHomePageData(subReddit.url)} className="hover:bg-red-500">
       {subRedditUrl === subReddit.url ? (
-        <div className="flex flex-col items-center m-2 p-4 md:flex-row bg-red-900 text-white">
+        <div className="flex flex-col items-center p-4 md:flex-row bg-red-900 text-white">
           <img
             src={subReddit.icon_img}
             className="w-[40px] h-[40px] rounded-full border-red-500 border-solid border-4 "
@@ -18,7 +19,7 @@ export default function SubRedditItem({ subReddit }) {
           </h3>
         </div>
       ) : (
-        <div className="flex flex-col items-center m-2 p-4 md:flex-row">
+        <div className="flex flex-col items-center p-4 md:flex-row">
           <img
             src={subReddit.icon_img}
             className="w-[40px] h-[40px] rounded-full border-red-500 border-solid border-4 "
@@ -28,6 +29,6 @@ export default function SubRedditItem({ subReddit }) {
           </h3>
         </div>
       )}
-    </div>
+    </Link>
   );
 }

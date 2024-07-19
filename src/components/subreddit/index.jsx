@@ -27,7 +27,7 @@ export default function SubReddits() {
     };
   }, []);
   return (
-    <div className="flex flex-row bg-gray-100  m-5 rounded overflow-x-scroll items-left md:flex-col md:overflow-hidden md:h-fit md:w-4/12">
+    <div className="flex flex-row bg-gray-100 rounded overflow-x-scroll items-left md:flex-col md:overflow-hidden md:h-fit md:w-4/12 md:mr-5">
       {windowWidth >= 770 ? (
         <h1 className="flex font-semibold text-3xl p-3">SubReddits</h1>
       ) : null}

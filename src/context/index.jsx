@@ -10,6 +10,8 @@ export default function GlobalState({ children }) {
   const [subReddits, setSubReddits] = useState([]);
   const [subRedditUrl, setSubRedditUrl] = useState("/r/funny/");
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+  const [selectedReddit, setSelectedReddit] = useState({});
+  const [comments, setComments] = useState([]);
 
   useEffect(()=>{
     fetchHomePageData();
@@ -73,6 +75,21 @@ export default function GlobalState({ children }) {
     }
   }
 
+  async function fetchComments(id){
+    setLoading(true);
+    try{  
+      const response = await fetch(`https://www.reddit.com${subRedditUrl}comments/${id}.json`);
+      const data = await response.json();
+      // console.log(data);
+      console.log(data[1]?.data?.children);
+      const redditComments = data[1]?.data?.children;
+      setComments(redditComments);
+
+    }catch(e){
+      console.log(e);
+    }
+  }
+
   return (
     <GlobalContext.Provider
       value={{
@@ -80,6 +97,7 @@ export default function GlobalState({ children }) {
         reddits,
         search,
         subRedditUrl,
+        comments,
         setSubRedditUrl,
         setSubReddits,
         setReddits,
@@ -89,6 +107,9 @@ export default function GlobalState({ children }) {
         fetchHomePageData,
         windowWidth,
         setWindowWidth,
+        selectedReddit,
+        setSelectedReddit,
+        fetchComments
       }}
     >
       {children}

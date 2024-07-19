@@ -3,7 +3,7 @@ import { GlobalContext } from "../../context";
 import RedditItem from "../../components/reddit-item";
 
 export default function HomePage() {
-  const { reddits, loading } =
+  const { reddits, loading} =
     useContext(GlobalContext);
 
   return (
