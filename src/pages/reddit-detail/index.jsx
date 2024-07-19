@@ -17,7 +17,8 @@ export default function RedditDetailPage() {
   const { id } = useParams();
   console.log(selectedReddit);
   return (
-    <div className="p-5 flex justify-between flex-col gap-2 border-b-4  border-r-4 border-black-500 hover:bg-gray-100 rounded-1xl">
+    <div className="gap-3 border-l-2">
+    <div className="p-5 flex justify-between flex-col gap-2 border-b-4  border-r-4 border-black-500 rounded-lg ml-3">
       {loading ? (
         <h1>Loading..Please Wait</h1>
       ) : (
@@ -57,6 +58,7 @@ export default function RedditDetailPage() {
       {comments && comments.length
         ? comments.map((comment) => <Comment comment={comment} />)
         : null}
+    </div>
     </div>
   );
 }
