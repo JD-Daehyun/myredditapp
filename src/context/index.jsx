@@ -66,9 +66,9 @@ export default function GlobalState({ children }) {
         `https://www.reddit.com${url}.json`
       );
       const data = await response.json();
-      const initialData = data?.data?.children || [];
+      const redditData = data?.data?.children || [];
       // console.log(initialData);
-      setReddits(initialData);
+      setReddits(redditData);
       setLoading(false);
     } catch (e) {
       console.log(e);
@@ -93,6 +93,7 @@ export default function GlobalState({ children }) {
   
   async function fetchInitialData() {
     setLoading(true);
+    setSubRedditUrl('');
     try {
       const response = await fetch(
         `https://www.reddit.com/.json`

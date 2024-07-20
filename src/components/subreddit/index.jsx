@@ -26,6 +26,7 @@ export default function SubReddits() {
       window.removeEventListener("resize", handleResize);
     };
   }, []);
+
   return (
     <div className="flex flex-row bg-gray-100 rounded overflow-x-scroll items-left md:flex-col md:overflow-hidden md:h-fit md:w-4/12 md:mr-5 md:max-w-[300px]">
       {windowWidth >= 770 ? (
@@ -35,7 +36,7 @@ export default function SubReddits() {
         <h1>Loading...Please Wait!</h1>
       ) : (
         subReddits.map((subReddit) => (
-          <SubRedditItem key ={subReddit.id} subReddit={subReddit?.data} />
+          <SubRedditItem key ={subReddit?.data?.id} subReddit={subReddit?.data} />
         ))
       )}
     </div>
