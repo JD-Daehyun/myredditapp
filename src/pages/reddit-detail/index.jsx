@@ -18,7 +18,7 @@ export default function RedditDetailPage() {
   console.log(selectedReddit);
   return (
     <div className="gap-3 border-l-2">
-      <div className="p-5 flex justify-between flex-col gap-2 border-b-4  border-r-4 border-black-500 rounded-lg ml-3">
+      <div className="p-5 flex justify-between flex-col gap-2 rounded-lg ">
         {loading ? (
           <div className="min-h-screen w-full flex justify-center items-center">
             <Circles
@@ -29,7 +29,7 @@ export default function RedditDetailPage() {
             />
           </div>
         ) : (
-          <div className="w-fit h-auto">
+          <div className="p-5 flex justify-between flex-col gap-2 border-b-4  border-r-4 border-black-500  rounded-2xl">
             <div className="flex flex-row items-center mb-2">
               <img
                 src="https://www.redditstatic.com/avatars/defaults/v2/avatar_default_1.png"
@@ -55,13 +55,14 @@ export default function RedditDetailPage() {
                 {selectedReddit.ups}
                 <AiOutlineArrowDown className="hover:text-blue-700" />
               </div>
-              <div className="flex flex-row items-center gap-1 text-1xl font-semibold bg-gray-200 p-2 rounded-lg w-fit hover:bg-gray-300">
+              <div className="flex flex-row items-center gap-1 text-1xl font-semibold bg-gray-200 p-2 rounded-lg w-fit">
                 <FaComment />
                 <p>{selectedReddit.num_comments} Comments</p>
               </div>
             </div>
           </div>
         )}
+        <h2 className="text-2xl font-semibold mt-2 mb-2">Comments</h2>
         {comments && comments.length
           ? comments.map((comment) => <Comment comment={comment} />)
           : null}
