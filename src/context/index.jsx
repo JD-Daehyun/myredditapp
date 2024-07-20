@@ -21,13 +21,14 @@ export default function GlobalState({ children }) {
   async function handleSubmit(event) {
     event.preventDefault();
     setLoading(true);
-    // console.log(search);
+    // console.log(search); ${subRedditUrl? subRedditUrl : '/'}
     try {
+      console.log(subRedditUrl)
       const response = await fetch(
-        `https://www.reddit.com/search.json?q=${search}`
+        `https://www.reddit.com${subRedditUrl? subRedditUrl : '/'}search.json?q=${search}&restrict_sr=1`
       );
       const result = await response.json();
-      // console.log(result);
+      console.log(result);
       setSearch("");
       setLoading(false);
 
@@ -67,7 +68,7 @@ export default function GlobalState({ children }) {
       );
       const data = await response.json();
       const redditData = data?.data?.children || [];
-      // console.log(initialData);
+      console.log(redditData);
       setReddits(redditData);
       setLoading(false);
     } catch (e) {
