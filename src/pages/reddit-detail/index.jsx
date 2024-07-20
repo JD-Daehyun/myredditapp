@@ -5,17 +5,30 @@ import { AiOutlineArrowUp, AiOutlineArrowDown } from "react-icons/ai";
 import { FaComment } from "react-icons/fa";
 import Comment from "../../components/comment";
 import { Circles } from "react-loader-spinner";
+import { useDispatch, useSelector } from "react-redux";
+import { addToLiked, removeFromLiked } from "../../store/slices/liked-slice";
 
 export default function RedditDetailPage() {
   const { loading, comments, fetchComments } = useContext(GlobalContext);
+  const dispatch = useDispatch();
+  const { liked } = useSelector((state) => state);
+  const { selectedReddit, setSelectedReddit } = useContext(GlobalContext);
+  function addToLikedReddits(event) {
+    //this disables Link functionality and allow users to click on the arrow
+    event.preventDefault();
+    dispatch(addToLiked(selectedReddit));
+  }
+  function removeFromLikedReddits(event) {
+    event.preventDefault();
+    dispatch(removeFromLiked(selectedReddit.id));
+  }
 
   useEffect(() => {
     fetchComments(selectedReddit.id);
   }, []);
 
-  const { selectedReddit, setSelectedReddit } = useContext(GlobalContext);
   // const { id } = useParams();
-  console.log(selectedReddit);
+  // console.log(selectedReddit);
   return (
     <div className="gap-3 border-l-2">
       <div className="p-5 flex justify-between flex-col gap-2 rounded-lg ">
@@ -51,7 +64,22 @@ export default function RedditDetailPage() {
 
             <div className="flex flex-row gap-3 mt-2">
               <div className="flex flex-row items-center gap-1 text-1xl font-semibold bg-gray-200 p-2 rounded-lg w-fit">
-                <AiOutlineArrowUp className="hover:text-red-700" />
+                <AiOutlineArrowUp
+                  className={
+                    liked.some(
+                      (likedreddit) => likedreddit.id === selectedReddit.id
+                    )
+                      ? "text-red-700"
+                      : "hover:text-red-700"
+                  }
+                  onClick={
+                    liked.some(
+                      (likedreddit) => likedreddit.id === selectedReddit.id
+                    )
+                      ? removeFromLikedReddits
+                      : addToLikedReddits
+                  }
+                />
                 {selectedReddit.ups}
                 <AiOutlineArrowDown className="hover:text-blue-700" />
               </div>
