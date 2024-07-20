@@ -1,70 +1,54 @@
-# Getting Started with Create React App
+# Re-Reacting Reddit: Portfolio Project
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Overview
 
-## Available Scripts
+This project is a re-creation of Reddit from scratch, aimed at showcasing my front-end development skills. The following sections detail the tools and technologies used, design decisions made, and features implemented in the project.
 
-In the project directory, you can run:
+## Technologies Used
 
-### `npm start`
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+### TailwindCSS
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+For the visual styling of the application, I utilized TailwindCSS. This CSS framework allowed for rapid and flexible UI development, enabling me to easily manage styling across different components and responsive design.
 
-### `npm test`
+### Context for State Management
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+For overall state management, I opted to use the Context. Given the nature of this assignment, which primarily involved accessing APIs and displaying data on the website, I found Context to be more straightforward and intuitive compared to React-Redux. The Context simplified the process of updating and accessing data across various components without the boilerplate often associated with Redux.
 
-### `npm run build`
+### React-Redux for Liked Reddits
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+However, for managing the state of liked reddits, I used React-Redux. In this scenario, Redux was more appropriate due to its robust state management capabilities and the need for consistent state updates across different components. Actions and reducers in Redux made it easier to manage the addition and removal of liked reddits.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+### React Icons and React Spinners
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+To enhance the visual appeal and user experience, I incorporated React-Icons for various icons throughout the application and React-Spinners for loading indicators. These libraries provided a wide range of customizable components that seamlessly integrated with the design.
 
-### `npm run eject`
+### Responsive Design with useState and useEffect
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+I implemented responsive design by switching the subreddit list layout from a column to a row when the window size is reduced. This was achieved using the useState hook to track the window width and the useEffect hook to update the state whenever the window is resized.
+```javascript
+const [windowWidth, setWindowWidth] = useState(window.innerWidth);
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+useEffect(() => {
+  const handleResize = () => setWindowWidth(window.innerWidth);
+  window.addEventListener('resize', handleResize);
+  return () => window.removeEventListener('resize', handleResize);
+}, []);
+```
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+## Features
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+1. **Responsive Design**: The application adapts to both mobile and desktop views, ensuring a seamless user experience across devices.
+2. **Like/Unlike Reddits**: Users can like and unlike reddits, with the state managed by Redux.
+3. **View Liked Reddits**: Users can view a list of their liked reddits by clicking the "My Liked Reddit" button.
+4. **Search Functionality**: Users can search for any term across all subreddits.
+5. **Subreddit Navigation**: Users can navigate to specific subreddits by clicking on them.
+6. **Subreddit-Specific Search**: Users can search within a specific subreddit.
+7. **View Comments**: Users can click on any reddit post to view its comments.
+8. **Home Navigation**: Users can return to the homepage by clicking on the logo.
+9. **Remove Subreddit Selection**: Users can deselect a subreddit by clicking the "X" mark.
 
-## Learn More
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+## Conclusion
 
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+Re-creating Reddit for this portfolio project allowed me to delve deeper into front-end development, from ideation to creation. It provided valuable experience in using modern web technologies and libraries, implementing responsive design, and managing state efficiently. This project not only showcases my technical skills but also my ability to build a functional and visually appealing web application.
