@@ -15,7 +15,7 @@ export default function GlobalState({ children }) {
   const [comments, setComments] = useState([]); //display comments for selected reddit
 
   useEffect(()=>{
-    fetchHomePageData();
+    fetchInitialData();
   },[])
 
   async function handleSubmit(event) {
@@ -90,6 +90,23 @@ export default function GlobalState({ children }) {
       console.log(e);
     }
   }
+  
+  async function fetchInitialData() {
+    setLoading(true);
+    try {
+      const response = await fetch(
+        `https://www.reddit.com/.json`
+      );
+      const data = await response.json();
+      const initialData = data?.data?.children || [];
+      // console.log(initialData);
+      setReddits(initialData);
+      setLoading(false);
+    } catch (e) {
+      console.log(e);
+      setLoading(false);
+    }
+  }
 
   return (
     <GlobalContext.Provider
@@ -110,7 +127,8 @@ export default function GlobalState({ children }) {
         setWindowWidth,
         selectedReddit,
         setSelectedReddit,
-        fetchComments
+        fetchComments,
+        fetchInitialData
       }}
     >
       {children}
