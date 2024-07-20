@@ -1,4 +1,5 @@
 import { createContext, useState, useEffect} from "react";
+import { Navigate } from "react-router-dom";
 
 export const GlobalContext = createContext(null);
 
@@ -6,12 +7,12 @@ export default function GlobalState({ children }) {
   //search parameter
   const [search, setSearch] = useState("");
   const [loading, setLoading] = useState(false);
-  const [reddits, setReddits] = useState([]);
-  const [subReddits, setSubReddits] = useState([]);
-  const [subRedditUrl, setSubRedditUrl] = useState("/r/funny/");
-  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
-  const [selectedReddit, setSelectedReddit] = useState({});
-  const [comments, setComments] = useState([]);
+  const [reddits, setReddits] = useState([]); //display list of reddits
+  const [subReddits, setSubReddits] = useState([]); //display list of subreddits
+  const [subRedditUrl, setSubRedditUrl] = useState("/r/funny/"); //click on a particular subreddit to access the reddits
+  const [windowWidth, setWindowWidth] = useState(window.innerWidth); //dynamic sizing for subreddit list
+  const [selectedReddit, setSelectedReddit] = useState({}); //identify selected reddit
+  const [comments, setComments] = useState([]); //display comments for selected reddit
 
   useEffect(()=>{
     fetchHomePageData();
@@ -20,7 +21,7 @@ export default function GlobalState({ children }) {
   async function handleSubmit(event) {
     event.preventDefault();
     setLoading(true);
-    console.log(search);
+    // console.log(search);
     try {
       const response = await fetch(
         `https://www.reddit.com/search.json?q=${search}`
