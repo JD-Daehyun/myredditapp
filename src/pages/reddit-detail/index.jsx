@@ -1,5 +1,5 @@
 import { useContext, useEffect } from "react";
-import { useLocation, useParams } from "react-router-dom";
+import { Link, useLocation, useParams } from "react-router-dom";
 import { GlobalContext } from "../../context";
 import { AiOutlineArrowUp, AiOutlineArrowDown } from "react-icons/ai";
 import { FaComment } from "react-icons/fa";
@@ -31,6 +31,9 @@ export default function RedditDetailPage() {
   // console.log(selectedReddit);
   return (
     <div className="gap-3 border-l-2">
+      <button className="rounded-full bg-red-500 text-white w-fit p-3 ml-3 hover:bg-red-900 outline-offset-2 shadow-xl">
+        <Link to={'/liked'}>My Liked Reddits</Link>
+      </button>
       <div className="p-5 flex justify-between flex-col gap-2 rounded-lg ">
         {loading ? (
           <div className="min-h-screen w-full flex justify-center items-center">

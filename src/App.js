@@ -4,6 +4,7 @@ import HomePage from "./pages/home";
 import Header from "./components/header";
 import RedditDetailPage from "./pages/reddit-detail";
 import SubReddits from "./components/subreddit";
+import LikedPage from "./pages/Liked";
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/:id" element={<RedditDetailPage />} />
+        <Route path="/liked" element={<LikedPage />} />
       </Routes>
       </div>
     </div>
