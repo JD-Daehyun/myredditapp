@@ -7,7 +7,7 @@ export default function SubRedditItem({ subReddit }) {
 
   // console.log(subRedditUrl, subReddit.url);
   return (
-    <Link to={'/'} onClick={() => fetchHomePageData(subReddit.url)} className="hover:bg-red-500">
+    <Link to={'/'} onClick={() => fetchHomePageData(subReddit)} className="hover:bg-red-500">
       {subRedditUrl === subReddit.url ? (
         <div className="flex flex-col items-center p-4 md:flex-row bg-red-900 text-white">
           <img

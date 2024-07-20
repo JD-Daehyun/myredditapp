@@ -1,4 +1,4 @@
-import { createContext, useState, useEffect} from "react";
+import { createContext, useState, useEffect } from "react";
 import { Navigate } from "react-router-dom";
 
 export const GlobalContext = createContext(null);
@@ -13,19 +13,22 @@ export default function GlobalState({ children }) {
   const [windowWidth, setWindowWidth] = useState(window.innerWidth); //dynamic sizing for subreddit list
   const [selectedReddit, setSelectedReddit] = useState({}); //identify selected reddit
   const [comments, setComments] = useState([]); //display comments for selected reddit
+  const [subRedditData, setSubRedditData] = useState({}) //select subreddit
 
-  useEffect(()=>{
+  useEffect(() => {
     fetchInitialData();
-  },[])
+  }, []);
 
   async function handleSubmit(event) {
     event.preventDefault();
     setLoading(true);
     // console.log(search); ${subRedditUrl? subRedditUrl : '/'}
     try {
-      console.log(subRedditUrl)
+      console.log(subRedditUrl);
       const response = await fetch(
-        `https://www.reddit.com${subRedditUrl? subRedditUrl : '/'}search.json?q=${search}&restrict_sr=1`
+        `https://www.reddit.com${
+          subRedditUrl ? subRedditUrl : "/"
+        }search.json?q=${search}&restrict_sr=1`
       );
       const result = await response.json();
       // console.log(result);
@@ -56,50 +59,48 @@ export default function GlobalState({ children }) {
     }
   }
 
-  async function fetchHomePageData(url='/') {
+  async function fetchHomePageData(subreddit) {
     setLoading(true);
-    setSubRedditUrl(url);
-    if( url && url.length >1){
-      url = url.slice(0,-1);
-    }
-    try {
-      const response = await fetch(
-        `https://www.reddit.com${url}.json`
-      );
-      const data = await response.json();
-      const redditData = data?.data?.children || [];
-      console.log(redditData);
-      setReddits(redditData);
-      setLoading(false);
-    } catch (e) {
-      console.log(e);
-      setLoading(false);
+    setSubRedditUrl(subreddit.url);
+    setSubRedditData(subreddit);
+    if (subreddit.url && subreddit.url.length > 1) {
+      const url = subreddit.url.slice(0, -1);
+
+      try {
+        const response = await fetch(`https://www.reddit.com${url}.json`);
+        const data = await response.json();
+        const redditData = data?.data?.children || [];
+        console.log(redditData);
+        setReddits(redditData);
+        setLoading(false);
+      } catch (e) {
+        console.log(e);
+        setLoading(false);
+      }
     }
   }
 
-  async function fetchComments(id){
+  async function fetchComments(id) {
     setLoading(true);
-    try{  
-      const response = await fetch(`https://www.reddit.com/${subRedditUrl}comments/${id}.json`);
+    try {
+      const response = await fetch(
+        `https://www.reddit.com/${subRedditUrl}comments/${id}.json`
+      );
       const data = await response.json();
       // console.log(data);
-      console.log(data[1]?.data?.children);
+      // console.log(data[1]?.data?.children);
       const redditComments = data[1]?.data?.children;
       setComments(redditComments);
-      
-
-    }catch(e){
+    } catch (e) {
       console.log(e);
     }
   }
-  
+
   async function fetchInitialData() {
     setLoading(true);
-    setSubRedditUrl('');
+    setSubRedditUrl("");
     try {
-      const response = await fetch(
-        `https://www.reddit.com/.json`
-      );
+      const response = await fetch(`https://www.reddit.com/.json`);
       const data = await response.json();
       const initialData = data?.data?.children || [];
       // console.log(initialData);
@@ -115,6 +116,7 @@ export default function GlobalState({ children }) {
     <GlobalContext.Provider
       value={{
         subReddits,
+        subRedditData,
         reddits,
         search,
         subRedditUrl,
@@ -131,7 +133,7 @@ export default function GlobalState({ children }) {
         selectedReddit,
         setSelectedReddit,
         fetchComments,
-        fetchInitialData
+        fetchInitialData,
       }}
     >
       {children}
