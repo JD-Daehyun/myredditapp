@@ -28,7 +28,7 @@ export default function GlobalState({ children }) {
         `https://www.reddit.com${subRedditUrl? subRedditUrl : '/'}search.json?q=${search}&restrict_sr=1`
       );
       const result = await response.json();
-      console.log(result);
+      // console.log(result);
       setSearch("");
       setLoading(false);
 
@@ -80,12 +80,13 @@ export default function GlobalState({ children }) {
   async function fetchComments(id){
     setLoading(true);
     try{  
-      const response = await fetch(`https://www.reddit.com${subRedditUrl}comments/${id}.json`);
+      const response = await fetch(`https://www.reddit.com/${subRedditUrl}comments/${id}.json`);
       const data = await response.json();
       // console.log(data);
       console.log(data[1]?.data?.children);
       const redditComments = data[1]?.data?.children;
       setComments(redditComments);
+      
 
     }catch(e){
       console.log(e);
