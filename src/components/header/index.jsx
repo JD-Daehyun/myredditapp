@@ -1,5 +1,5 @@
 import { useContext, useEffect } from "react";
-import { FaReddit, FaSearch, FaTimes} from "react-icons/fa";
+import { FaReddit, FaSearch, FaTimes } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import { GlobalContext } from "../../context/index";
 
@@ -44,15 +44,15 @@ export default function Header() {
       <form onSubmit={handleSubmit}>
         <div className="mr-3 flex justify-between items-center flex-row gap-1">
           {subRedditUrl ? (
-            <div className="flex flex-row justify-center items-center p-1 mr-1 h-[40px] rounded-full border-solid border-2 border-red-700 outline-offset-2 shadow-xl">
+            <div className="flex flex-row justify-center items-center p-1 h-[40px] rounded-full border-solid border-2 border-red-700 outline-offset-2 shadow-xl">
               <img
                 src={subRedditData.icon_img}
-                className="w-[20px] h-[20px] rounded-full border-red-500 border-solid border-2 mr-1"
+                className="w-[20px] h-[20px] font-sm rounded-full border-red-500 border-solid border-2 mr-1"
               />
-              <h3 className="truncate w-[60px] text-center">
+              <h3 className="truncate w-[0px] text-center md:w-[80px]">
                 {subRedditData.title}
               </h3>
-              <FaTimes onClick={fetchInitialData}/>
+              <FaTimes onClick={fetchInitialData} className="w-[20px]"/>
             </div>
           ) : null}
           <input
@@ -62,10 +62,12 @@ export default function Header() {
             onChange={(event) => setSearch(event.target.value)}
             className="mr-1 h-[40px] rounded-lg border-solid border-2 border-black-700 outline-offset-2 shadow-xl md:w-[400px]"
           />
-          <FaSearch
-            onClick={handleSubmit}
-            className="w-[35px] h-[35px] hover:text-red-500"
-          />
+          {windowWidth >= 770 ? (
+            <FaSearch
+              onClick={handleSubmit}
+              className="w-[25px] h-[25px] hover:text-red-500"
+            />
+          ) : null}
         </div>
       </form>
     </nav>

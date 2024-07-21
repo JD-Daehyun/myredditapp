@@ -1,5 +1,5 @@
 import { createContext, useState, useEffect } from "react";
-import { Navigate } from "react-router-dom";
+import { Navigate, useNavigate } from "react-router-dom";
 
 export const GlobalContext = createContext(null);
 
@@ -14,13 +14,14 @@ export default function GlobalState({ children }) {
   const [selectedReddit, setSelectedReddit] = useState({}); //identify selected reddit
   const [comments, setComments] = useState([]); //display comments for selected reddit
   const [subRedditData, setSubRedditData] = useState({}) //select subreddit
-
+  const navigate = useNavigate();
   useEffect(() => {
     fetchInitialData();
   }, []);
 
   async function handleSubmit(event) {
     event.preventDefault();
+    navigate('/')
     setLoading(true);
     // console.log(search); ${subRedditUrl? subRedditUrl : '/'}
     try {
