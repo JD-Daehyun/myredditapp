@@ -26,7 +26,7 @@ export default function LikedPage() {
         {
             liked && liked.length ? 
       liked.map((likedReddit) => (
-        <div className="mb-5 p-5 flex justify-between flex-col gap-2 border-2 border-red-500 rounded-2xl">
+        <div className="mb-5 p-5 flex justify-between flex-col gap-2 border-2 border-red-500 rounded-2xl mt-5">
           <div className="flex flex-row items-center">
             <img
               src="https://www.redditstatic.com/avatars/defaults/v2/avatar_default_1.png"

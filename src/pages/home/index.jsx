@@ -9,7 +9,7 @@ export default function HomePage() {
 
   return (
     <div className="flex flex-col w-full  gap-3 border-l-2">
-      <button className="rounded-full bg-red-500 text-white w-fit p-3 ml-3 hover:bg-red-900 outline-offset-2 shadow-xl">
+      <button className="rounded-full bg-red-500 text-white w-fit p-3 ml-3 hover:bg-red-900 outline-offset-2 shadow-xl mt-3 mb-3  ">
         <Link to={'/liked'}>My Liked Reddits</Link>
       </button>
       {loading ? (

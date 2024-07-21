@@ -60,7 +60,7 @@ export default function Header() {
             name="search-reddit"
             value={search}
             onChange={(event) => setSearch(event.target.value)}
-            className="mr-1 w-[200px] h-[40px] rounded-lg border-solid border-2 border-black-700 outline-offset-2 shadow-xl md:w-[400px]"
+            className="mr-1 h-[40px] rounded-lg border-solid border-2 border-black-700 outline-offset-2 shadow-xl md:w-[400px]"
           />
           <FaSearch
             onClick={handleSubmit}
